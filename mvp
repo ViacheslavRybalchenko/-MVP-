@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+#include <Windows.h>
+
+
+using namespace std;
+// Модель (Model) представляє логічну частину додатку.
+class Model {
+public:
+    string getData() {
+        return "Це дані з моделі";
+    }
+};
+
+// Представлення (View) відповідає за візуальне відображення і взаємодію з користувачем.
+class View {
+public:
+    void showData(const string& data) {
+        cout << "Дані відображаються в представленні: " << data << endl;
+    }
+
+    string getUserInput() {
+        string input;
+        cout << "Введіть дані: ";
+        cin >> input;
+        return input;
+    }
+};
+
+// Презентер (Presenter) містить бізнес-логіку та встановлює зв'язок між моделлю та представленням.
+class Presenter {
+private:
+    Model model;
+    View view;
+
+public:
+    void run() {
+        string data = model.getData();
+        view.showData(data);
+
+        string userInput = view.getUserInput();
+        data = "Користувач ввів: " + userInput;
+        view.showData(data);
+    }
+};
+
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    Presenter presenter;
+    presenter.run();
+
+    return 0;
+}
